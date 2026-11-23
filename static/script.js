@@ -48,9 +48,9 @@ function uploadFile(file) {
     progress.classList.remove('hidden');
     progressBar.style.width = '0%';
 
-    const maxSize = 10 * 1024 * 1024;
+    const maxSize = 500 * 1024 * 1024;
     if (file.size > maxSize) {
-        showError('Файл слишком большой (максимум 10 MB)');
+        showError('Файл слишком большой (максимум 500 МБ)');
         return;
     }
 
@@ -92,6 +92,9 @@ function uploadFile(file) {
 function showResult(data) {
     const fullUrl = window.location.origin + data.url;
     const minutes = Math.floor(data.expires_in / 60);
+    const durationText = minutes >= 60
+    ? `${Math.floor(minutes / 60)} ч ${minutes % 60 ? (minutes % 60) + ' мин' : ''}`.trim()
+    : `${minutes} мин`;
 
     result.innerHTML = `
         <h3>✅ Файл загружен</h3>
@@ -101,7 +104,7 @@ function showResult(data) {
         </div>
         <div class="meta">
             <strong>${escapeHtml(data.name)}</strong> — ${formatSize(data.size)}<br>
-            Ссылка будет активна ${minutes} мин.
+            Ссылка будет активна ${durationText}.
         </div>
     `;
     result.classList.remove('hidden');

@@ -24,9 +24,9 @@ var (
 	filesMux sync.Mutex
 	uploadDir = "./uploads"
 	// Время жизни файла
-	fileTTL = 10 * time.Minute
-	// Максимальный размер файла (10 MB)
-	maxUploadSize int64 = 10 << 20
+	fileTTL = 1 * time.Hour
+	// Максимальный размер файла (500 MB)
+	maxUploadSize int64 = 500 << 20
 )
 
 func main() {
@@ -69,9 +69,9 @@ func uploadHandler(w http.ResponseWriter, r *http.Request) {
 
 	// Ограничиваем размер тела запроса
 	r.Body = http.MaxBytesReader(w, r.Body, maxUploadSize)
-	if err := r.ParseMultipartForm(maxUploadSize); err != nil {
-		http.Error(w, "Файл слишком большой", http.StatusBadRequest)
-		return
+	if err := r.ParseMultipartForm(32 << 20); err != nil {
+    	http.Error(w, "Файл слишком большой", http.StatusBadRequest)
+    	return
 	}
 
 	file, header, err := r.FormFile("file")

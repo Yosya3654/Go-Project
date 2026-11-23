@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Временное хранилище файлов</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>📁 Временное хранилище</h1>
+        <p class="subtitle">Файлы удаляются автоматически через 10 минут</p>
+
+        <div id="dropzone" class="dropzone">
+            <input type="file" id="fileInput" hidden>
+            <div class="dropzone-content">
+                <div class="icon">⬆️</div>
+                <p>Перетащите файл сюда или</p>
+                <button type="button" id="browseBtn" class="btn">Выберите файл</button>
+                <p class="hint">Максимум 10 MB</p>
+            </div>
+        </div>
+
+        <div id="progress" class="progress hidden">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+
+        <div id="result" class="result hidden"></div>
+        <div id="error" class="error hidden"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

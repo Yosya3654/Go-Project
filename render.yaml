@@ -1,0 +1,19 @@
+services:
+  - type: web
+    name: go-file-drop
+    runtime: go
+    plan: free
+    region: frankfurt
+    branch: main
+    buildCommand: go build -o app .
+    startCommand: ./app
+    envVars:
+      - key: UPLOAD_DIR
+        value: /var/data/uploads
+      # PORT Render подставляет автоматически — задавать не нужно
+    # Persistent Disk — только на плане Starter и выше.
+    # На free-плане закомментируйте блок ниже (Render выдаст ошибку).
+    # disk:
+    #   name: data
+    #   mountPath: /var/data
+    #   sizeGB: 1

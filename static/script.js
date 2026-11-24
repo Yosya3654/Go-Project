@@ -56,7 +56,10 @@ function uploadFile(file) {
 
     const formData = new FormData();
     formData.append('file', file);
+<<<<<<< HEAD
     formData.append('originalName', file.name);
+=======
+>>>>>>> 9df3276ac66afacc22ef63b8bfe2173396a33b6c
 
     const xhr = new XMLHttpRequest();
     xhr.open('POST', '/api/upload');
